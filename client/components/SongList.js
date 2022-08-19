@@ -1,8 +1,7 @@
 import React from "react";
 import Song from "./Song";
 
-function SongList({ songs, artistName }) {
-  console.log(songs, "SONGLIST");
+function SongList({ songs, artistName,start, setCurrentSong, currentSong }) {
   return (
     <table id="songs">
       <tbody>
@@ -20,6 +19,9 @@ function SongList({ songs, artistName }) {
               trackNumber={idx + 1}
               song={song}
               artistName={artistName}
+              start={start}
+              setCurrentSong={setCurrentSong}
+              currentSong={currentSong}
             />
           );
         })}

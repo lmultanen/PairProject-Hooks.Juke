@@ -1,7 +1,7 @@
 import React from "react";
 import SongList from "./SongList";
 
-function SingleAlbum({ album }) {
+function SingleAlbum({ album, start, setCurrentSong, currentSong }) {
   return (
     <div className="container">
       <div id="single-album" className="column">
@@ -12,7 +12,13 @@ function SingleAlbum({ album }) {
             <small>{album.artist.name}</small>
           </a>
         </div>
-        <SongList songs={album.songs} artistName={album.artist.name} />
+        <SongList 
+          songs={album.songs} 
+          artistName={album.artist.name} 
+          start={start} 
+          setCurrentSong={setCurrentSong}
+          currentSong={currentSong}
+        />
       </div>
     </div>
   );

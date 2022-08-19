@@ -1,11 +1,17 @@
 import React from "react";
 
-function Song({ song, trackNumber, artistName }) {
-  console.log(song);
+function Song({ song, trackNumber, artistName, start, setCurrentSong, currentSong }) {
   return (
-    <tr>
+    <tr className={currentSong.id === song.id ? 'active' : ''}>
       <td>
-        <i className="fa fa-play-circle" />
+        {currentSong.id === song.id ?
+          <></> :
+          <i className="fa fa-play-circle" 
+            onClick={()=>{
+              start(song.audioUrl);
+              setCurrentSong(song);
+            }}/>
+        } 
       </td>
       <td>{trackNumber}</td>
       <td>{song.name}</td>

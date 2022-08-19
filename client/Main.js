@@ -2,34 +2,28 @@ import React from "react";
 import { Sidebar, AllAlbums, Player, SingleAlbum } from "./components";
 import Axios from "axios";
 
-const albumDummy = {
-  id: 3,
-  name: "Chain React-ion",
-  artworkUrl: "default-album.jpg",
-  artistId: 1,
-  artist: {
-    id: 1,
-    name: "The Crash Test Dummies",
-  },
-  songs: [
-    {
-      id: 13,
-      name: "Set Some State",
-      audioUrl:
-        "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Zenith/01%20Shooting%20Star.mp3",
-      genre: "Instrumental",
-      albumId: 2,
-      artistId: 1,
-    },
-  ],
-};
+const audio = document.createElement('audio');
 
 const Main = () => {
   const [albums, setAlbums] = React.useState([]);
   const [selectedAlbum, setSelectedAlbum] = React.useState({});
+  const [currentSong, setCurrentSong] = React.useState({})
+  const [playStatus, setPlayStatus] = React.useState(false)
 
-  function selectAlbum() {
-    setSelectedAlbum(albumDummy);
+  async function selectAlbum(id) {
+    try {
+      const {data} = await Axios.get(`/api/albums/${id}`);
+      setSelectedAlbum(data)
+    } catch (err) {
+      console.err('Error fetching album', err)
+    }
+  }
+  function start (url) {
+    // audio.src = 'https://learndotresources.s3.amazonaws.com/workshop/5616dbe5a561920300b10cd7/Dexter_Britain_-_03_-_The_Stars_Are_Out_Interlude.mp3';
+    audio.src = url;
+    audio.load();
+    audio.play();
+    setPlayStatus(true)
   }
 
   React.useEffect(() => {
@@ -49,13 +43,20 @@ const Main = () => {
   return (
     <>
       <div id="main" className="row container">
-        <Sidebar />
+        <Sidebar setSelectedAlbum={setSelectedAlbum}/>
         {!Object.keys(selectedAlbum).length ? (
-          <AllAlbums albums={albums} selectAlbum={selectAlbum} />
+          <AllAlbums albums={albums} selectAlbum={selectAlbum}/>
         ) : (
-          <SingleAlbum album={selectedAlbum} />
+          <SingleAlbum album={selectedAlbum} start={start} setCurrentSong={setCurrentSong} currentSong={currentSong}/>
         )}
-        <Player />
+        <Player 
+          currentSong={currentSong} 
+          audio={audio} 
+          playStatus ={playStatus} 
+          setPlayStatus={setPlayStatus}
+          start={start}
+          setCurrentSong={setCurrentSong}
+        />
       </div>
     </>
   );

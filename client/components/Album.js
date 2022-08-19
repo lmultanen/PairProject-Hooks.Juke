@@ -5,7 +5,7 @@ function Album({ album, selectAlbum }) {
     <div className="album">
       <a
         onClick={() => {
-          selectAlbum();
+          selectAlbum(album.id);
         }}
       >
         <img src={album.artworkUrl} />
