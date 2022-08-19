@@ -3,14 +3,25 @@ import { Sidebar, AllAlbums, Player, SingleAlbum } from "./components";
 import Axios from "axios";
 
 const albumDummy = {
-  id: 1,
-  name: "No Dummy",
+  id: 3,
+  name: "Chain React-ion",
   artworkUrl: "default-album.jpg",
   artistId: 1,
   artist: {
     id: 1,
     name: "The Crash Test Dummies",
   },
+  songs: [
+    {
+      id: 13,
+      name: "Set Some State",
+      audioUrl:
+        "https://storage.googleapis.com/juke-1379.appspot.com/juke-music/Dexter%20Britain/Zenith/01%20Shooting%20Star.mp3",
+      genre: "Instrumental",
+      albumId: 2,
+      artistId: 1,
+    },
+  ],
 };
 
 const Main = () => {
@@ -42,7 +53,7 @@ const Main = () => {
         {!Object.keys(selectedAlbum).length ? (
           <AllAlbums albums={albums} selectAlbum={selectAlbum} />
         ) : (
-          <SingleAlbum />
+          <SingleAlbum album={selectedAlbum} />
         )}
         <Player />
       </div>

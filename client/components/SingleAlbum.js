@@ -1,54 +1,18 @@
 import React from "react";
+import SongList from "./SongList";
 
-function SingleAlbum() {
+function SingleAlbum({ album }) {
   return (
     <div className="container">
       <div id="single-album" className="column">
         <div className="album">
           <a>
-            <img src="default-album.jpg" />
-            <p>ALBUM 2</p>
-            <small>Artist Name</small>
+            <img src={album.artworkUrl} />
+            <p>{album.name}</p>
+            <small>{album.artist.name}</small>
           </a>
         </div>
-        <table id="songs">
-          <tbody>
-            <tr className="gray">
-              <td />
-              <td>#</td>
-              <td>Name</td>
-              <td>Artist</td>
-              <td>Genre</td>
-            </tr>
-            <tr>
-              <td>
-                <i className="fa fa-play-circle" />
-              </td>
-              <td>1</td>
-              <td>Song Name</td>
-              <td>Artist Name</td>
-              <td>Song Genre</td>
-            </tr>
-            <tr>
-              <td>
-                <i className="fa fa-play-circle" />
-              </td>
-              <td>2</td>
-              <td>Song Name</td>
-              <td>Artist Name</td>
-              <td>Song Genre</td>
-            </tr>
-            <tr>
-              <td>
-                <i className="fa fa-play-circle" />
-              </td>
-              <td>3</td>
-              <td>Song Name</td>
-              <td>Artist Name</td>
-              <td>Song Genre</td>
-            </tr>
-          </tbody>
-        </table>
+        <SongList songs={album.songs} artistName={album.artist.name} />
       </div>
     </div>
   );
