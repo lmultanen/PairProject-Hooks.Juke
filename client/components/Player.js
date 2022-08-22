@@ -11,7 +11,6 @@ function Player({currentSong, audio, playStatus, setPlayStatus, start, setCurren
       let songs = data.songs;
       let length = songs.length;
       let currentIndex = songs.findIndex(song => song.id === currentSong.id)
-      console.log('current song index', currentIndex)
       let nextIndex = (currentIndex + 1)%length
       let nextSong = songs[nextIndex]
       start(nextSong.audioUrl)
@@ -26,7 +25,6 @@ function Player({currentSong, audio, playStatus, setPlayStatus, start, setCurren
       let songs = data.songs;
       let length = songs.length;
       let currentIndex = songs.findIndex(song => song.id === currentSong.id)
-      console.log('current song index', currentIndex)
       let nextIndex = currentIndex > 0 ?(currentIndex - 1) : length - 1
       let nextSong = songs[nextIndex]
       start(nextSong.audioUrl)
